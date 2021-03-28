@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="calcular">Calcular</button>
+    <label for="">Cantidad con la que pagas </label>
+    <input type="number" id="nmbCantidad">
+    <label for="">Importe a pagar </label>
+    <input type="number" id="nmbPagar">
+    <div id="resto">
+        
+    </div>
+    	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	
+	<script>
+        
+        $(controlaEventos);
+        
+        function controlaEventos(){
+            $("#calcular").on("click",calculaResto);
+        }
+        
+        function calculaResto(){
+            var nmbCantidad = $("#nmbCantidad").val();
+            var nmbPagar =  $("#nmbPagar").val();
+
+            //RD Resto a devolver
+            var RD = nmbCantidad - nmbPagar;
+            console.log("🚀 ~ file: profe-cajero.html ~ line 33 ~ calculaResto ~ RD", RD)
+            
+            var b50 = Math.floor(RD / 50);
+            console.log("🚀 ~ file: profe-cajero.html ~ line 35 ~ calculaResto ~ b50", b50)
+            RD -= (b50 * 50);
+            console.log("🚀 ~ file: profe-cajero.html ~ line 38 ~ calculaResto ~ RD", RD)
+            var b20 = Math.floor(RD / 20);
+            console.log("🚀 ~ file: profe-cajero.html ~ line 38 ~ calculaResto ~ b20", b20)
+            RD -= (b20 * 20);
+            console.log("🚀 ~ file: profe-cajero.html ~ line 42 ~ calculaResto ~ RD", RD)
+            var b10 = Math.floor(RD / 10);
+            console.log("🚀 ~ file: profe-cajero.html ~ line 41 ~ calculaResto ~ b10", b10)
+            RD -= (b10 * 10);
+            var b5 = Math.floor(RD / 5);
+            console.log("🚀 ~ file: profe-cajero.html ~ line 47 ~ calculaResto ~ b5", b5)
+            RD -= (b5 * 5);
+            console.log("🚀 ~ file: profe-cajero.html ~ line 49 ~ calculaResto ~ RD", RD)
+            var m2 = Math.floor(RD / 2);
+            RD -= (m2 * 2);            
+            var m1 = Math.floor(RD / 1);
+            RD -= (m1 * 1);
+            
+           
+            
+            // $("#resto").empty();
+            if(b50>0){$("#resto").append("<h2>" + b50 + " De 50 </h2>")}
+            if(b20>0){$("#resto").append("<h2>" + b20 + " De 20 </h2>")}
+            console.log("🚀 ~ file: profe-cajero.html ~ line 60 ~ calculaResto ~ b20", b20)
+            if(b10>0){$("#resto").append("<h2>" + b10 + " De 10 </h2>")}
+            if(b5>0){$("#resto").append("<h2>" + b5 + " De 5 </h2>")}
+            if(m2>0){$("#resto").append("<h2>" + m2 + " De 2 </h2>")}
+            if(m1>0){$("#resto").append("<h2>" + m1 + " De 1 </h2>")}
+            
+        }
+        
+        
+        
+    </script>
+</body>
+</html>
