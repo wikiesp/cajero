@@ -36,7 +36,8 @@
 				const totalPagar = $("#price").val();
 				const decimalPagar = Number.parseFloat(totalPagar).toFixed(2);
 
-				const calcularResto = decimalCantidad - decimalPagar;
+				const calcularResto = (decimalCantidad - decimalPagar).toFixed(2);
+				console.log("🚀 ~ file: index.html ~ line 40 ~ calcularResto", calcularResto);
 
 				var restamosCantidad = calcularResto;
 
@@ -54,19 +55,17 @@
 					$("#cambio").append(`Devolver ${sumandoBilletes} billete de 50€<br>`);
 					restamosCantidad = calcularResto - 50;
 					resultadoRestoCantidad += restamosCantidad;
-                    console.log("🚀 ~ file: index.html ~ line 57 ~ resultadoRestoCantidad", resultadoRestoCantidad)
 				}
-				sumandoBilletes = 0;
-				console.log("valor resultado 50 "+resultadoRestoCantidad)
+
 				while (resultadoRestoCantidad.toFixed(2) >= 20) {
-                    console.log("🚀 ~ file: index.html ~ line 62 ~ resultadoRestoCantidad", resultadoRestoCantidad)
 					sumandoBilletes++;
-					$("#cambio").append(`Devolver ${sumandoBilletes} billete de 20€<br>`);
-					console.log("🚀 ~ file: index.html ~ line 58 ~ cambio", cambio);
 					restamosCantidad = resultadoRestoCantidad - 20;
 					resultadoRestoCantidad = restamosCantidad;
+					if (resultadoRestoCantidad > 20) {
+						$("#cambio").append(`Devolver ${sumandoBilletes} billete de 20€<br>`);
+					}
 				}
-				console.log("🚀 ~ file: index.html ~ line 61 ~ sumandoBilletes", sumandoBilletes);
+
 				sumandoBilletes = 0;
 				if (resultadoRestoCantidad.toFixed(2) >= 10) {
 					sumandoBilletes++;
@@ -74,6 +73,7 @@
 					restamosCantidad = resultadoRestoCantidad - 10;
 					resultadoRestoCantidad = restamosCantidad;
 				}
+
 				sumandoBilletes = 0;
 				if (resultadoRestoCantidad.toFixed(2) >= 5) {
 					sumandoBilletes++;
@@ -81,34 +81,46 @@
 					restamosCantidad = resultadoRestoCantidad - 5;
 					resultadoRestoCantidad = restamosCantidad;
 				}
+
 				sumandoBilletes = 0;
-				if (resultadoRestoCantidad.toFixed(2) >= 2) {
+				while (resultadoRestoCantidad.toFixed(2) >= 2) {
 					sumandoBilletes++;
-					$("#cambio").append(`Devolver ${sumandoBilletes} moneda de 2€<br>`);
 					restamosCantidad = resultadoRestoCantidad - 2;
+					if (resultadoRestoCantidad.toFixed(2) >= 2) {
+						$("#cambio").append(`Devolver ${sumandoBilletes} moneda de 2€<br>`);
+					}
 					resultadoRestoCantidad = restamosCantidad;
 				}
+
 				sumandoBilletes = 0;
 				if (resultadoRestoCantidad.toFixed(2) >= 1) {
 					sumandoBilletes++;
-					$("#cambio").append(`Devolver una moneda de 1€<br>`);
+					$("#cambio").append(`Devolver 1 moneda de 1€<br>`);
 					restamosCantidad = resultadoRestoCantidad - 1;
 					resultadoRestoCantidad = restamosCantidad;
 				}
+
 				sumandoBilletes = 0;
 				if (resultadoRestoCantidad.toFixed(2) >= 0.5) {
 					sumandoBilletes++;
-					$("#cambio").append(`Devolver una moneda de 50cent<br>`);
 					restamosCantidad = resultadoRestoCantidad - 0.5;
+
+					if (resultadoRestoCantidad.toFixed(2) > 0.5) {
+						$("#cambio").append(`Devolver ${sumandoBilletes} moneda de 50cent<br>`);
+					}
 					resultadoRestoCantidad = restamosCantidad;
 				}
-				sumandoBilletes = 0;
-				if (resultadoRestoCantidad.toFixed(2) >= 0.2) {
+
+				while (resultadoRestoCantidad.toFixed(2) >= 0.2) {
 					sumandoBilletes++;
-					$("#cambio").append(`Devolver una moneda de 20cent<br>`);
 					restamosCantidad = resultadoRestoCantidad - 0.2;
+
+					if (resultadoRestoCantidad.toFixed(2) > 0.2) {
+						$("#cambio").append(`Devolver ${sumandoBilletes} moneda de 20cent<br>`);
+					}
 					resultadoRestoCantidad = restamosCantidad;
 				}
+
 				sumandoBilletes = 0;
 				if (resultadoRestoCantidad.toFixed(2) >= 0.1) {
 					sumandoBilletes++;
@@ -116,20 +128,28 @@
 					restamosCantidad = resultadoRestoCantidad - 0.09;
 					resultadoRestoCantidad = restamosCantidad;
 				}
+
 				sumandoBilletes = 0;
 				if (resultadoRestoCantidad.toFixed(2) >= 0.04) {
 					sumandoBilletes++;
-					$("#cambio").append(`Devolver una moneda de 5cent<br>`);
-					restamosCantidad = resultadoRestoCantidad - 0.05;
+					restamosCantidad = resultadoRestoCantidad - 20;
+					if (resultadoRestoCantidad.toFixed(2) > 0.04) {
+						$("#cambio").append(`Devolver ${sumandoBilletes} billete de 5cent€<br>`);
+					}
 					resultadoRestoCantidad = restamosCantidad;
 				}
+
 				sumandoBilletes = 0;
 				if (resultadoRestoCantidad.toFixed(2) >= 0.02) {
 					sumandoBilletes++;
-					$("#cambio").append(`Devolver una moneda de 2cent<br>`);
 					restamosCantidad = resultadoRestoCantidad - 0.02;
+
+					if (resultadoRestoCantidad.toFixed(2) > 0.02) {
+						$("#cambio").append(`Devolver ${sumandoBilletes} moneda de 2cent€<br>`);
+					}
 					resultadoRestoCantidad = restamosCantidad;
 				}
+
 				sumandoBilletes = 0;
 				if (resultadoRestoCantidad.toFixed(2) >= 0.01) {
 					sumandoBilletes++;
