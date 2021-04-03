@@ -5,6 +5,17 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Cajero</title>
+		<style>
+			#cambio p{
+				font-size: 3em;
+				display: flex;
+				align-items: center;
+			}
+			#cambio img{
+				height: 169px;
+				margin-left: 15px;
+			}
+		</style>
 	</head>
 	<body>
 		<h1>Caja</h1>
@@ -48,28 +59,42 @@
 				var sumandoBilletes = 0;
 
 				/**----------------------
+				 *    Billetes
+				 *------------------------**/
+				var cincuenta= 'img/cincuenta-euros.png';
+				var veinte= 'img/veinte-euros.png';
+				var diez = 'img/diez-euros.png'
+				var cinco= 'img/cinco-euros.webp';
+
+				/**----------------------
 				 *    Condiciones
 				 *------------------------**/
 				if (calcularResto > 50) {
 					sumandoBilletes++;
-					$('#cambio').append(`Devolver ${sumandoBilletes} billete de 50€<br>`);
+					$('#cambio').append(`<p>${sumandoBilletes} x  <img src='${cincuenta}'></p>`);
+					// $('#cambio').append(`Devolver ${sumandoBilletes} billete de 50€<br>`);
+					// `<img src='${url}'>`
 					restamosCantidad = calcularResto - 50;
 					resultadoRestoCantidad += restamosCantidad;
+                    console.log("🚀 ~ file: index.html ~ line 76 ~ resultadoRestoCantidad", resultadoRestoCantidad)
 				}
+				// sumandoBilletes = 0;
 
 				while (resultadoRestoCantidad.toFixed(2) >= 20) {
 					sumandoBilletes++;
+					console.log(sumandoBilletes)
 					restamosCantidad = resultadoRestoCantidad - 20;
 					resultadoRestoCantidad = restamosCantidad;
-					if (resultadoRestoCantidad > 20) {
-						$('#cambio').append(`Devolver ${sumandoBilletes} billete de 20€<br>`);
+					if (resultadoRestoCantidad >= 20) {
+						$('#cambio').append(`<p>${sumandoBilletes} x <img src='${veinte}'></p>`);
 					}
+                    console.log("🚀 ~ file: index.html ~ line 86 ~ resultadoRestoCantidad", resultadoRestoCantidad)
 				}
 
 				sumandoBilletes = 0;
 				if (resultadoRestoCantidad.toFixed(2) >= 10) {
 					sumandoBilletes++;
-					$('#cambio').append(`Devolver ${sumandoBilletes} billete de 10€<br>`);
+					$('#cambio').append(`<p>${sumandoBilletes} x <img src='${diez}'></p>`);
 					restamosCantidad = resultadoRestoCantidad - 10;
 					resultadoRestoCantidad = restamosCantidad;
 				}
@@ -77,7 +102,7 @@
 				sumandoBilletes = 0;
 				if (resultadoRestoCantidad.toFixed(2) >= 5) {
 					sumandoBilletes++;
-					$('#cambio').append(`Devolver ${sumandoBilletes} billete de 5€<br>`);
+					$('#cambio').append(`<p>${sumandoBilletes} x <img src='${cinco}'></p>`);
 					restamosCantidad = resultadoRestoCantidad - 5;
 					resultadoRestoCantidad = restamosCantidad;
 				}
@@ -133,10 +158,10 @@
 				while (resultadoRestoCantidad.toFixed(2) >= 0.02) {
 					sumandoBilletes++;
 					restamosCantidad = resultadoRestoCantidad - 0.02;
-					if (resultadoRestoCantidad.toFixed(2) >= 0.02) {
+					resultadoRestoCantidad = restamosCantidad;
+					if (resultadoRestoCantidad.toFixed(2) < 0.02) {
 						$('#cambio').append(`Devolver ${sumandoBilletes} moneda de 2cent<br>`);
 					}
-					resultadoRestoCantidad = restamosCantidad;
 				}
 
 				if (resultadoRestoCantidad >= 0.01) {
