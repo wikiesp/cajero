@@ -4,172 +4,22 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="css/style.css">
 		<title>Cajero</title>
-		<style>
-			#cambio p{
-				font-size: 3em;
-				display: flex;
-				align-items: center;
-			}
-			#cambio img{
-				height: 169px;
-				margin-left: 15px;
-			}
-		</style>
 	</head>
 	<body>
-		<h1>Caja</h1>
-		<p>Calcular el cambio</p>
+		<h1>Calcular Cambio</h1>
 		<form action="#" id="form">
-			<label for="cantidad">Introduce cantidad(efectivo)</label><br />
-			<input type="number" name="cantidad" id="cash" /><br />
 			<label for="total">Precio del producto</label><br />
 			<input type="number" name="pagar" id="price" /><br />
-			<input type="submit" id="calcular" value="calcular" />
+			<label for="cantidad">Efectivo del cliente</label><br />
+			<input type="number" name="cantidad" id="cash" /><br />
+			<input type="submit" id="calculate" value="calculate" />
 		</form>
 
-		<!--? RESTO --->
+		<!-- RESTO --->
 		<div id="cambio"></div>
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
-		<script>
-			$('#cash').focus();
-			$('#calcular').click(function (e) {
-				e.preventDefault();
-				const valorCantidad = $('#cash').val();
-				const decimalCantidad = Number.parseFloat(valorCantidad).toFixed(2);
-				const cantidad = valorCantidad > 100;
-				if (cantidad) {
-					$('#cash').focus();
-					alert('No puede ser mayor que 100€');
-					return;
-				}
-				const totalPagar = $('#price').val();
-				const decimalPagar = Number.parseFloat(totalPagar).toFixed(2);
-
-				const calcularResto = (decimalCantidad - decimalPagar).toFixed(2);
-				console.log('🚀 ~ file: index.html ~ line 40 ~ calcularResto', calcularResto);
-
-				var restamosCantidad = calcularResto;
-
-				/**----------------------
-				 *    variables/contador
-				 *------------------------**/
-				var resultadoRestoCantidad = 0;
-				var sumandoBilletes = 0;
-
-				/**----------------------
-				 *    Billetes
-				 *------------------------**/
-				var cincuenta= 'img/cincuenta-euros.png';
-				var veinte= 'img/veinte-euros.png';
-				var diez = 'img/diez-euros.png'
-				var cinco= 'img/cinco-euros.webp';
-
-				/**----------------------
-				 *    Condiciones
-				 *------------------------**/
-				if (calcularResto > 50) {
-					sumandoBilletes++;
-					$('#cambio').append(`<p>${sumandoBilletes} x  <img src='${cincuenta}'></p>`);
-					// $('#cambio').append(`Devolver ${sumandoBilletes} billete de 50€<br>`);
-					// `<img src='${url}'>`
-					restamosCantidad = calcularResto - 50;
-					resultadoRestoCantidad += restamosCantidad;
-                    console.log("🚀 ~ file: index.html ~ line 76 ~ resultadoRestoCantidad", resultadoRestoCantidad)
-				}
-				// sumandoBilletes = 0;
-
-				while (resultadoRestoCantidad.toFixed(2) >= 20) {
-					sumandoBilletes++;
-					console.log(sumandoBilletes)
-					restamosCantidad = resultadoRestoCantidad - 20;
-					resultadoRestoCantidad = restamosCantidad;
-					if (resultadoRestoCantidad >= 20) {
-						$('#cambio').append(`<p>${sumandoBilletes} x <img src='${veinte}'></p>`);
-					}
-                    console.log("🚀 ~ file: index.html ~ line 86 ~ resultadoRestoCantidad", resultadoRestoCantidad)
-				}
-
-				sumandoBilletes = 0;
-				if (resultadoRestoCantidad.toFixed(2) >= 10) {
-					sumandoBilletes++;
-					$('#cambio').append(`<p>${sumandoBilletes} x <img src='${diez}'></p>`);
-					restamosCantidad = resultadoRestoCantidad - 10;
-					resultadoRestoCantidad = restamosCantidad;
-				}
-
-				sumandoBilletes = 0;
-				if (resultadoRestoCantidad.toFixed(2) >= 5) {
-					sumandoBilletes++;
-					$('#cambio').append(`<p>${sumandoBilletes} x <img src='${cinco}'></p>`);
-					restamosCantidad = resultadoRestoCantidad - 5;
-					resultadoRestoCantidad = restamosCantidad;
-				}
-
-				sumandoBilletes = 0;
-				while (resultadoRestoCantidad.toFixed(2) >= 2) {
-					sumandoBilletes++;
-					restamosCantidad = resultadoRestoCantidad - 2;
-
-					if (resultadoRestoCantidad.toFixed(2) >= 2) {
-						$('#cambio').append(`Devolver ${sumandoBilletes} moneda de 2€<br>`);
-					}
-					resultadoRestoCantidad = restamosCantidad;
-				}
-
-				sumandoBilletes = 0;
-				if (resultadoRestoCantidad.toFixed(2) >= 1) {
-					sumandoBilletes++;
-					$('#cambio').append(`Devolver 1 moneda de 1€<br>`);
-					restamosCantidad = resultadoRestoCantidad - 1;
-					resultadoRestoCantidad = restamosCantidad;
-				}
-
-				sumandoBilletes = 0;
-				if (resultadoRestoCantidad.toFixed(2) >= 0.5) {
-					restamosCantidad = resultadoRestoCantidad - 0.5;
-					$('#cambio').append(`Devolver 1 moneda de 50cent<br>`);
-					resultadoRestoCantidad = restamosCantidad;
-				}
-
-				while (resultadoRestoCantidad.toFixed(2) >= 0.2) {
-					sumandoBilletes++;
-					restamosCantidad = resultadoRestoCantidad - 0.2;
-
-					if (resultadoRestoCantidad.toFixed(2) > 0.2) {
-						$('#cambio').append(`Devolver ${sumandoBilletes} moneda de 20cent<br>`);
-					}
-					resultadoRestoCantidad = restamosCantidad;
-				}
-
-				if (resultadoRestoCantidad.toFixed(2) >= 0.1) {
-					$('#cambio').append(`Devolver 1 moneda de 10cent<br>`);
-					restamosCantidad = resultadoRestoCantidad - 0.1;
-					resultadoRestoCantidad = restamosCantidad;
-				}
-
-				if (resultadoRestoCantidad.toFixed(2) >= 0.05) {
-					$('#cambio').append(`Devolver 1 moneda de 5cent<br>`);
-					restamosCantidad = resultadoRestoCantidad - 0.05;
-					resultadoRestoCantidad = restamosCantidad;
-				}
-				sumandoBilletes = 0;
-				while (resultadoRestoCantidad.toFixed(2) >= 0.02) {
-					sumandoBilletes++;
-					restamosCantidad = resultadoRestoCantidad - 0.02;
-					resultadoRestoCantidad = restamosCantidad;
-					if (resultadoRestoCantidad.toFixed(2) < 0.02) {
-						$('#cambio').append(`Devolver ${sumandoBilletes} moneda de 2cent<br>`);
-					}
-				}
-
-				if (resultadoRestoCantidad >= 0.01) {
-					$('#cambio').append(`Devolver 1 moneda de 1cent<br>`);
-					restamosCantidad = resultadoRestoCantidad - 0.01;
-					resultadoRestoCantidad = restamosCantidad;
-				}
-			});
-		</script>
+		<script async src="js/calculate.js"></script>
 	</body>
 </html>

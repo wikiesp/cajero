@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap');
+body {
+	text-align: center;
+	font-family: 'RocknRoll One', sans-serif;
+	background-color: #f3f4ed;
+}
+#cambio p {
+	font-size: 2.3em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+#cambio img {
+	height: 69px;
+	margin-left: 15px;
+}
+h1 {
+	color: #f05945;
+}
+input {
+	font-family: 'RocknRoll One', sans-serif;
+	color: #536162;
+    -moz-appearance: textfield;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+input[type='submit'] {
+	color: #d44000;
+}
+#cambio {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
